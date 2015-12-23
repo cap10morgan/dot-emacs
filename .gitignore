@@ -1,0 +1,9 @@
+elpa/
+backups/
+%backup%~
+auto-save-list/
+ido.last
+packages/
+places
+projectile-bookmarks.eld
+tramp
