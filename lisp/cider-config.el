@@ -1,4 +1,5 @@
 (require 'cider)
+(require 'cider-scratch)
 (add-hook 'cider-repl-mode-hook #'smartparens-strict-mode)
 (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'cider-mode-hook #'eldoc-mode)
@@ -8,7 +9,16 @@
 (setq cider-font-lock-dynamically '(macro core function var))
 (setq cider-prompt-for-symbol nil) ; use symbol under point
 
-;;; start a REPL with the test profile
+;; REPL history
+(setq cider-repl-history-file "~/.emacs.d/cider-history")
+(setq cider-repl-wrap-history t)
+(setq cider-repl-history-size 3000)
+
+;; REPL pretty printing
+(setq cider-repl-use-pretty-printing t)
+(setq cider-repl-use-clojure-font-lock t)
+
+;; start a REPL with the test profile
 (defun cider-jack-in-test-profile ()
   (interactive)
   (let ((cider-lein-parameters (concat "with-profile +test "

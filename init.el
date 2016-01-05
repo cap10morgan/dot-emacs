@@ -10,8 +10,9 @@
 
 (require 'my-packages)
 
-;; handy shortcuts
+;; handy shortcuts & keybindings
 (defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key (kbd "C-M-\\") 'just-one-space) ; I like Spotlight on cmd-spc
 
 ;; get exec path & other env vars from shell
 (require 'exec-path-from-shell)
@@ -24,7 +25,7 @@
 
 (require 'ido-config)
 
-(require 'my-smartparens-config)
+(require 'lisp-parens-config)
 
 ;; company
 (add-hook 'after-init-hook 'global-company-mode)
@@ -37,11 +38,17 @@
 
 (require 'magit-config)
 
+;; clojure
 (require 'cider-config)
+;(require 'clj-refactor-config) ; try again when 2.0.0 comes out
+
+;;(require 'flycheck-config) ; not working w/ CIDER 0.10.0
 
 ;; markdown
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+
+(require 'markdowner-mode)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdowner-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdowner-mode))
 
 (require 'erlang-config)
 
@@ -53,3 +60,7 @@
 (require 'projectile)
 (projectile-global-mode)
 (put 'downcase-region 'disabled nil)
+
+;; customizations
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
