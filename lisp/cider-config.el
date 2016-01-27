@@ -29,15 +29,31 @@
   '(define-key clojure-mode-map
      (kbd "C-c j") 'cider-jack-in-test-profile))
 
-;;; auto-reload on save
+;;; auto-reload in REPL on save
 ;;; Taken from https://github.com/RallySoftware/rally-emacs/blob/master/rally/cider.el
-(defun cider-auto-reload ()
-  (when (and (member "cider-mode" (get-active-modes))
-             (not (string/ends-with (buffer-name) "project.clj")))
-    (cider-load-buffer)))
+;;; This is currently unusable. Moves the point to the error constantly.
+;; (defun get-active-modes ()
+;;   (let ((active-modes))
+;;     (mapc (lambda (mode) (condition-case nil
+;;                              (if (and (symbolp mode) (symbol-value mode))
+;;                                  (add-to-list 'active-modes (prin1-to-string mode)))
+;;                            (error nil)))
+;;           minor-mode-list)
+;;     active-modes))
 
-(defadvice save-buffer (after cider-reload-saved-file activate)
-  (ignore-errors
-    (cider-auto-reload)))
+;; (defun string/ends-with (s ending)
+;;   "return non-nil if string S ends with ENDING."
+;;   (let ((elength (length ending)))
+;;     (and (>= (length s) elength)
+;;          (string= (substring s (- 0 elength)) ending))))
+
+;; (defun cider-auto-reload ()
+;;   (when (and (member "cider-mode" (get-active-modes))
+;;              (not (string/ends-with (buffer-name) "project.clj")))
+;;     (cider-load-buffer)))
+
+;; (defadvice save-buffer (after cider-reload-saved-file activate)
+;;  (ignore-errors
+;;    (cider-auto-reload)))
 
 (provide 'cider-config)
